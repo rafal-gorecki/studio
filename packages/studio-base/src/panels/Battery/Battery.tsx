@@ -4,18 +4,17 @@
 
 import * as _ from "lodash-es";
 import { useCallback, useEffect, useLayoutEffect, useReducer, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 import { parseMessagePath, MessagePath } from "@foxglove/message-path";
 import { MessageEvent, PanelExtensionContext, SettingsTreeAction } from "@foxglove/studio";
 import { simpleGetMessagePathDataItems } from "@foxglove/studio-base/components/MessagePathSyntax/simpleGetMessagePathDataItems";
-import { turboColorString } from "@foxglove/studio-base/util/colorUtils";
+// import { turboColorString } from "@foxglove/studio-base/util/colorUtils";
 
 import { settingsActionReducer, useSettingsTree } from "./settings";
 import type { Config } from "./types";
 
-import './styles.css'; // Assuming you have the CSS styles in a separate file
-
+import "./styles.css"; // Assuming you have the CSS styles in a separate file
 
 type Props = {
   context: PanelExtensionContext;
@@ -121,35 +120,35 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-function getConicGradient(config: Config, width: number, height: number, batteryAngle: number) {
-  let colorStops: { color: string; location: number }[];
-  switch (config.colorMode) {
-    case "colormap":
-        colorStops = [
-          { color: "#f00", location: 0 },
-          { color: "#ff0", location: 0.5 },
-          { color: "#0c0", location: 1 },
-        ];
-      break;
-    case "gradient":
-      colorStops = [
-        { color: config.gradient[0], location: 0 },
-        { color: config.gradient[1], location: 1 },
-      ];
-      break;
-  }
-  if (config.reverse) {
-    colorStops = colorStops
-      .map((stop) => ({ color: stop.color, location: 1 - stop.location }))
-      .reverse();
-  }
+// function getConicGradient(config: Config, width: number, height: number, batteryAngle: number) {
+//   let colorStops: { color: string; location: number }[];
+//   switch (config.colorMode) {
+//     case "colormap":
+//       colorStops = [
+//         { color: "#f00", location: 0 },
+//         { color: "#ff0", location: 0.5 },
+//         { color: "#0c0", location: 1 },
+//       ];
+//       break;
+//     case "gradient":
+//       colorStops = [
+//         { color: config.gradient[0], location: 0 },
+//         { color: config.gradient[1], location: 1 },
+//       ];
+//       break;
+//   }
+//   if (config.reverse) {
+//     colorStops = colorStops
+//       .map((stop) => ({ color: stop.color, location: 1 - stop.location }))
+//       .reverse();
+//   }
 
-  return `conic-gradient(from ${-Math.PI / 2 + batteryAngle}rad at 50% ${
-    100 * (width / 2 / height)
-  }%, ${colorStops
-    .map((stop) => `${stop.color} ${stop.location * 2 * (Math.PI / 2 - batteryAngle)}rad`)
-    .join(",")}, ${colorStops[0]!.color})`;
-}
+//   return `conic-gradient(from ${-Math.PI / 2 + batteryAngle}rad at 50% ${
+//     100 * (width / 2 / height)
+//   }%, ${colorStops
+//     .map((stop) => `${stop.color} ${stop.location * 2 * (Math.PI / 2 - batteryAngle)}rad`)
+//     .join(",")}, ${colorStops[0]!.color})`;
+// }
 
 export function Battery({ context }: Props): JSX.Element {
   // panel extensions must notify when they've completed rendering
@@ -241,25 +240,23 @@ export function Battery({ context }: Props): JSX.Element {
   const { minValue, maxValue } = config;
   const scaledValue =
     (Math.max(minValue, Math.min(rawValue, maxValue)) - minValue) / (maxValue - minValue);
-  const outOfBounds = rawValue < minValue || rawValue > maxValue;
-  const padding = 0.1;
-
+  // const outOfBounds = rawValue < minValue || rawValue > maxValue;
+  // const padding = 0.1;
 
   const batteryLevel = rawValue * scaledValue;
 
   const updateBatteryLevel = (level: number) => {
     // Change color based on battery level
-    let levelClass = '';
+    let levelClass = "";
     if (level <= 20) {
-        levelClass = 'level low';
+      levelClass = "level low";
     } else if (level <= 50) {
-        levelClass = 'level medium';
+      levelClass = "level medium";
     } else {
-        levelClass = 'level high';
+      levelClass = "level high";
     }
     return levelClass;
   };
-
 
   return (
     <div
@@ -274,11 +271,14 @@ export function Battery({ context }: Props): JSX.Element {
         padding: 8,
       }}
     >
-        <div className="battery">
-            <div className={updateBatteryLevel(batteryLevel)} style={{ width: `${batteryLevel}%` }}></div>
-            <div className="terminal"></div>
-            <div className="percentage">{batteryLevel}%</div>
-        </div>
+      <div className="battery">
+        <div
+          className={updateBatteryLevel(batteryLevel)}
+          style={{ width: `${batteryLevel}%` }}
+        ></div>
+        <div className="terminal"></div>
+        <div className="percentage">{batteryLevel}%</div>
+      </div>
     </div>
   );
 }
