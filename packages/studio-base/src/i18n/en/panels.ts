@@ -5,6 +5,8 @@
 export const panels = {
   "3D": "3D",
   "3DPanelDescription": "Display markers, camera images, meshes, URDFs, and more in a 3D scene.",
+  battery: "Battery",
+  batteryDescription: "Display a battery indicator.",
   callService: "Service Call",
   callServiceDescription: "Call a service and view the service call result",
   dataSourceInfo: "Data Source Info",
@@ -42,6 +44,8 @@ export const panels = {
   teleopDescription: "Teleoperate a robot over a live connection.",
   topicGraph: "Topic Graph",
   topicGraphDescription: "Display a graph of active nodes, topics, and services.",
+  triggerButton: "Trigger Button",
+  triggerButtonDescription: "Button to call std_srvs/Trigger.",
   userScripts: "User Scripts",
   userScriptsDescription:
     "Write custom data transformations in TypeScript. Previously known as Node Playground.",

@@ -8,6 +8,7 @@ import { TAB_PANEL_TYPE } from "@foxglove/studio-base/util/globalConstants";
 
 import dataSourceInfoThumbnail from "./DataSourceInfo/thumbnail.png";
 import gaugeThumbnail from "./Gauge/thumbnail.png";
+import batteryThumbnail from "./Battery/thumbnail.png";
 import imageThumbnail from "./Image/thumbnail.png";
 import indicatorThumbnail from "./Indicator/thumbnail.png";
 import logThumbnail from "./Log/thumbnail.png";
@@ -15,6 +16,7 @@ import mapThumbnail from "./Map/thumbnail.png";
 import parametersThumbnail from "./Parameters/thumbnail.png";
 import plotThumbnail from "./Plot/thumbnail.png";
 import publishThumbnail from "./Publish/thumbnail.png";
+import triggerButtonThumbnail from "./TriggerButton/thumbnail.png";
 import rawMessagesThumbnail from "./RawMessages/thumbnail.png";
 import stateTransitionsThumbnail from "./StateTransitions/thumbnail.png";
 import tabThumbnail from "./Tab/thumbnail.png";
@@ -63,6 +65,13 @@ export const getBuiltin: (t: TFunction<"panels">) => PanelInfo[] = (t) => [
     description: t("indicatorDescription"),
     thumbnail: indicatorThumbnail,
     module: async () => await import("./Indicator"),
+  },
+  {
+    title: t("battery"),
+    type: "Battery",
+    description: t("batteryDescription"),
+    thumbnail: batteryThumbnail,
+    module: async () => await import("./Battery"),
   },
   {
     title: t("gauge"),
@@ -171,5 +180,12 @@ export const getBuiltin: (t: TFunction<"panels">) => PanelInfo[] = (t) => [
     thumbnail: tabThumbnail,
     module: async () => await import("./Tab"),
     hasCustomToolbar: true,
+  },
+  {
+    title: t("triggerButton"),
+    type: "TriggerButton",
+    description: t("triggerButtonDescription"),
+    thumbnail: triggerButtonThumbnail,
+    module: async () => await import("./TriggerButton"),
   },
 ];
